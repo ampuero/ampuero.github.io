@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luis Ampuero — ampuero.pe</title>
+  <meta name="description" content="Luis Ampuero · Tecnólogo peruano en Italia. Sitio personal en construcción." />
+  <meta name="theme-color" content="#070711" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Luis Ampuero — ampuero.pe" />
+  <meta property="og:description" content="Tecnólogo peruano en Italia. Algo nuevo está en construcción." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#070711; --bg2:#0c0c1d;
+      --txt:#eef0ff; --muted:#a3a7c9;
+      --neon:#7c5cff; --neon2:#22d3ee; --neon3:#ff5c8a;
+      --glass:rgba(255,255,255,.06); --stroke:rgba(255,255,255,.12);
+      --max:1100px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',system-ui,sans-serif;color:var(--txt);
+      background:var(--bg);overflow-x:hidden;line-height:1.6;
+      cursor:none;
+    }
+    @media (hover:none){body{cursor:auto}}
+    h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif}
+
+    /* ---- Fondos ---- */
+    #stars{position:fixed;inset:0;z-index:-2;display:block}
+    .aurora{position:fixed;inset:-30%;z-index:-3;filter:blur(90px);opacity:.55;
+      background:
+        radial-gradient(40% 40% at 20% 30%,var(--neon) 0,transparent 60%),
+        radial-gradient(35% 35% at 80% 20%,var(--neon2) 0,transparent 60%),
+        radial-gradient(45% 45% at 60% 80%,var(--neon3) 0,transparent 60%);
+      animation:drift 18s ease-in-out infinite alternate}
+    @keyframes drift{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(0,-4%,0) scale(1.1)}}
+    .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+    /* ---- Cursor halo ---- */
+    .glow{position:fixed;top:0;left:0;width:34px;height:34px;border-radius:50%;
+      background:radial-gradient(circle,var(--neon2),transparent 70%);
+      pointer-events:none;z-index:999;transform:translate(-50%,-50%);
+      transition:width .2s,height .2s,background .2s;mix-blend-mode:screen}
+    .glow.big{width:90px;height:90px;background:radial-gradient(circle,var(--neon),transparent 70%)}
+    @media (hover:none){.glow{display:none}}
+
+    /* ---- Scroll progress ---- */
+    #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:1000;
+      background:linear-gradient(90deg,var(--neon),var(--neon2),var(--neon3))}
+
+    /* ---- Nav ---- */
+    nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:900;
+      display:flex;gap:22px;align-items:center;padding:10px 22px;border-radius:999px;
+      background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--stroke)}
+    nav .brand{font-weight:700;letter-spacing:.5px}
+    nav a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .25s}
+    nav a:hover{color:var(--txt)}
+    @media(max-width:560px){nav a.hideMob{display:none}}
+
+    /* ---- Layout ---- */
+    section{max-width:var(--max);margin:0 auto;padding:110px 24px}
+    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+      align-items:flex-start;padding-top:140px}
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:7px 16px;border-radius:999px;
+      background:var(--glass);border:1px solid var(--stroke);font-size:.8rem;color:var(--muted);
+      backdrop-filter:blur(8px);margin-bottom:26px}
+    .dot{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 10px #3ddc84;
+      animation:pulse 1.6s infinite}
+    @keyframes pulse{50%{opacity:.4}}
+    h1{font-size:clamp(2.6rem,9vw,6rem);line-height:1.02;font-weight:700;letter-spacing:-2px}
+    .grad{background:linear-gradient(90deg,var(--neon2),var(--neon),var(--neon3));
+      background-size:200% auto;-webkit-background-clip:text;background-clip:text;
+      -webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
+    @keyframes shine{to{background-position:200% center}}
+    .roles{font-size:clamp(1.1rem,3vw,1.7rem);color:var(--muted);margin-top:18px;min-height:1.6em}
+    .roles b{color:var(--txt);font-weight:600}
+    .caret{color:var(--neon2);animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+    .lead{max-width:560px;margin-top:26px;color:var(--muted)}
+    .flags{font-size:1.4rem;letter-spacing:4px;margin-top:6px}
+
+    .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+    .btn{position:relative;padding:14px 28px;border-radius:14px;font-weight:600;
+      text-decoration:none;border:1px solid var(--stroke);color:var(--txt);
+      transition:transform .15s ease,box-shadow .3s;display:inline-block}
+    .btn.primary{background:linear-gradient(90deg,var(--neon),var(--neon3));border:none;
+      box-shadow:0 8px 30px rgba(124,92,255,.45)}
+    .btn.primary:hover{box-shadow:0 12px 44px rgba(124,92,255,.7)}
+    .btn.ghost{background:var(--glass);backdrop-filter:blur(8px)}
+
+    /* ---- Cards ---- */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:34px}
+    .card{padding:28px;border-radius:20px;background:var(--glass);border:1px solid var(--stroke);
+      backdrop-filter:blur(12px);transition:transform .2s,border-color .3s;transform-style:preserve-3d}
+    .card:hover{border-color:rgba(124,92,255,.5)}
+    .card .ico{font-size:1.8rem;margin-bottom:12px}
+    .card h3{font-size:1.15rem;margin-bottom:8px}
+    .card p{color:var(--muted);font-size:.95rem}
+
+    .eyebrow{color:var(--neon2);font-weight:600;letter-spacing:3px;text-transform:uppercase;
+      font-size:.78rem;margin-bottom:14px}
+    h2{font-size:clamp(1.8rem,5vw,2.8rem);letter-spacing:-1px}
+    .about p{color:var(--muted);max-width:640px;margin-top:18px;font-size:1.05rem}
+
+    footer{text-align:center;padding:60px 24px;color:var(--muted);font-size:.9rem;
+      border-top:1px solid var(--stroke)}
+    footer .clock{font-family:'Space Grotesk';color:var(--txt)}
+
+    /* ---- Reveal ---- */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
+    .reveal.in{opacity:1;transform:none}
+
+    @media (prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important;scroll-behavior:auto}
+      .reveal{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora"></div>
+  <canvas id="stars"></canvas>
+  <div class="grain"></div>
+  <div class="glow" id="glow"></div>
+  <div id="progress"></div>
+
+  <nav>
+    <span class="brand grad">ampuero.pe</span>
+    <a href="#sobre" class="hideMob">Sobre mí</a>
+    <a href="#ando" class="hideMob">En qué ando</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <header class="hero">
+    <span class="badge"><span class="dot"></span> Sitio en construcción · v0</span>
+    <h1>Hola, soy<br><span class="grad">Luis Ampuero</span></h1>
+    <p class="roles"><b id="role"></b><span class="caret">|</span></p>
+    <p class="flags">🇵🇪 → 🇮🇹</p>
+    <p class="lead">Tecnólogo peruano viviendo en Italia, casado con italiana. Construyo, automatizo y experimento con productos digitales. Esto es apenas el comienzo.</p>
+    <div class="cta">
+      <a href="#contacto" class="btn primary mag">Escríbeme</a>
+      <a href="#ando" class="btn ghost mag">Qué estoy haciendo</a>
+    </div>
+  </header>
+
+  <section id="sobre" class="about reveal">
+    <p class="eyebrow">Sobre mí</p>
+    <h2>Entre dos orillas, <span class="grad">una sola pasión</span>: la tecnología.</h2>
+    <p>Nací en Perú y hoy vivo en Italia junto a mi esposa. Me muevo en el mundo tech: ideas, herramientas, automatización y todo lo que haga la vida más simple y la curiosidad más grande. Esta página crecerá pronto — por ahora, considérala un anticipo.</p>
+  </section>
+
+  <section id="ando" class="reveal">
+    <p class="eyebrow">En qué ando</p>
+    <h2>Trabajo en progreso</h2>
+    <div class="grid">
+      <div class="card tilt"><div class="ico">⚙️</div><h3>Tecnología</h3><p>Exploración de herramientas, automatización e integración de sistemas.</p></div>
+      <div class="card tilt"><div class="ico">🌍</div><h3>Perú & Italia</h3><p>Una vida entre dos culturas, dos idiomas y dos formas de ver el mundo.</p></div>
+      <div class="card tilt"><div class="ico">🧪</div><h3>Experimentos</h3><p>Proyectos personales en construcción. Pronto habrá más que mostrar aquí.</p></div>
+    </div>
+  </section>
+
+  <section id="contacto" class="reveal" style="text-align:center">
+    <p class="eyebrow">Contacto</p>
+    <h2>¿Hablamos?</h2>
+    <p class="lead" style="margin:18px auto 0">Mientras termino el sitio, puedes encontrarme aquí.</p>
+    <div class="cta" style="justify-content:center">
+      <a href="mailto:hola@ampuero.pe" class="btn primary mag">hola@ampuero.pe</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="btn ghost mag">LinkedIn</a>
+      <a href="https://github.com/" target="_blank" rel="noopener" class="btn ghost mag">GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Hora local en Italia: <span class="clock" id="clock">--:--:--</span></p>
+    <p style="margin-top:8px">© <span id="year"></span> Luis Ampuero · ampuero.pe · Hecho con HTML5 puro</p>
+  </footer>
+
+  <script>
+    /* ---------- Año + reloj Italia ---------- */
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const clock = document.getElementById('clock');
+    function tick(){
+      clock.textContent = new Date().toLocaleTimeString('it-IT',{timeZone:'Europe/Rome'});
+    }
+    tick(); setInterval(tick,1000);
+
+    /* ---------- Roles rotativos (typewriter) ---------- */
+    const roles=['Tecnólogo 💻','Builder de productos','Peruano en Italia 🌎','Curioso digital','Automatizador'];
+    const el=document.getElementById('role');
+    let r=0,c=0,del=false;
+    (function type(){
+      const w=roles[r];
+      el.textContent=del?w.slice(0,c--):w.slice(0,c++);
+      if(!del&&c===w.length+1){del=true;setTimeout(type,1400);return;}
+      if(del&&c<0){del=false;r=(r+1)%roles.length;c=0;}
+      setTimeout(type,del?45:90);
+    })();
+
+    /* ---------- Scroll progress ---------- */
+    const bar=document.getElementById('progress');
+    addEventListener('scroll',()=>{
+      const h=document.documentElement;
+      bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';
+    });
+
+    /* ---------- Reveal on scroll ---------- */
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(s=>io.observe(s));
+
+    /* ---------- Cursor halo ---------- */
+    const glow=document.getElementById('glow');
+    let mx=innerWidth/2,my=innerHeight/2,gx=mx,gy=my;
+    addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    document.querySelectorAll('a,button,.card,.btn').forEach(t=>{
+      t.addEventListener('mouseenter',()=>glow.classList.add('big'));
+      t.addEventListener('mouseleave',()=>glow.classList.remove('big'));
+    });
+    (function follow(){gx+=(mx-gx)*.18;gy+=(my-gy)*.18;
+      glow.style.transform=`translate(${gx}px,${gy}px) translate(-50%,-50%)`;
+      requestAnimationFrame(follow);})();
+
+    /* ---------- Botones magnéticos ---------- */
+    document.querySelectorAll('.mag').forEach(b=>{
+      b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();
+        b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.25}px,${(e.clientY-r.top-r.height/2)*.35}px)`;});
+      b.addEventListener('mouseleave',()=>b.style.transform='');
+    });
+
+    /* ---------- Tilt 3D en tarjetas ---------- */
+    document.querySelectorAll('.tilt').forEach(c=>{
+      c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();
+        const rx=((e.clientY-r.top)/r.height-.5)*-10, ry=((e.clientX-r.left)/r.width-.5)*10;
+        c.style.transform=`perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;});
+      c.addEventListener('mouseleave',()=>c.style.transform='');
+    });
+
+    /* ---------- Constelación en canvas ---------- */
+    const cv=document.getElementById('stars'),ctx=cv.getContext('2d');
+    let W,H,pts,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;
+      const n=Math.min(110,Math.floor(W*H/14000));
+      pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,
+        vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4}));}
+    resize();addEventListener('resize',resize);
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      for(const p of pts){
+        p.x+=p.vx;p.y+=p.vy;
+        if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+        const dx=p.x-mx,dy=p.y-my,dm=Math.hypot(dx,dy);
+        if(dm<140){p.x+=dx/dm*1.2;p.y+=dy/dm*1.2;}
+        ctx.beginPath();ctx.arc(p.x,p.y,1.6,0,7);ctx.fillStyle='rgba(180,190,255,.8)';ctx.fill();
+      }
+      for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+        const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+        if(d<120){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle=`rgba(124,92,255,${.18*(1-d/120)})`;ctx.stroke();}
+      }
+      requestAnimationFrame(draw);
+    }
+    if(!reduce)draw();
+  </script>
+</body>
+</html>
